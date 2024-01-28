@@ -5,14 +5,14 @@
 #include "lve_game_object.hpp"
 #include "lve_renderer.hpp"
 #include "lve_window.hpp"
-
+#include "tools/Utils.hpp"
 // std
 #include <memory>
 #include <vector>
 
 namespace lve {
 class FirstApp {
- public:
+public:
   static constexpr int WIDTH = 800;
   static constexpr int HEIGHT = 600;
 
@@ -24,9 +24,10 @@ class FirstApp {
 
   void run();
 
- private:
+private:
   void loadGameObjects();
 
+  Logger *firstAppLogger = new Logger("FirstAppClass", 1, GREEN);
   LveWindow lveWindow{WIDTH, HEIGHT, "Vulkan Tutorial"};
   LveDevice lveDevice{lveWindow};
   LveRenderer lveRenderer{lveWindow, lveDevice};
@@ -35,4 +36,4 @@ class FirstApp {
   std::unique_ptr<LveDescriptorPool> globalPool{};
   LveGameObject::Map gameObjects;
 };
-}  // namespace lve
+} // namespace lve

@@ -4,6 +4,7 @@
 #include "lve_buffer.hpp"
 #include "lve_camera.hpp"
 #include "simple_render_system.hpp"
+#include "tools/Utils.hpp"
 
 // libs
 #define GLM_FORCE_RADIANS
@@ -39,6 +40,7 @@ FirstApp::FirstApp() {
 FirstApp::~FirstApp() {}
 
 void FirstApp::run() {
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Entering Run function");
   std::vector<std::unique_ptr<LveBuffer>> uboBuffers(
       LveSwapChain::MAX_FRAMES_IN_FLIGHT);
   for (int i = 0; i < uboBuffers.size(); i++) {
@@ -47,7 +49,6 @@ void FirstApp::run() {
         VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
     uboBuffers[i]->map();
   }
-
   auto globalSetLayout = LveDescriptorSetLayout::Builder(lveDevice)
                              .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
                                          VK_SHADER_STAGE_ALL_GRAPHICS)
@@ -114,30 +115,44 @@ void FirstApp::run() {
   }
 
   vkDeviceWaitIdle(lveDevice.device());
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Exiting Run function");
 }
 
 void FirstApp::loadGameObjects() {
-  std::shared_ptr<LveModel> lveModel =
-      LveModel::createModelFromFile(lveDevice, "models/flat_vase.obj");
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Loading Game Objects");
+
+  std::shared_ptr<LveModel> lveModel = LveModel::createModelFromFile(
+      lveDevice, "/Users/benfields/Documents/cs_sandbox/vulkan/"
+                 "vulkanEngineStarter/models/flat_vase.obj");
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Loaded flat_vase.obj");
   auto flatVase = LveGameObject::createGameObject();
   flatVase.model = lveModel;
   flatVase.transform.translation = {-.5f, .5f, 0.f};
   flatVase.transform.scale = {3.f, 1.5f, 3.f};
   gameObjects.emplace(flatVase.getId(), std::move(flatVase));
 
-  lveModel = LveModel::createModelFromFile(lveDevice, "models/smooth_vase.obj");
+  lveModel = LveModel::createModelFromFile(
+      lveDevice, "/Users/benfields/Documents/cs_sandbox/vulkan/"
+                 "vulkanEngineStarter/models/smooth_vase.obj");
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Loaded smooth_vase.obj");
+
   auto smoothVase = LveGameObject::createGameObject();
   smoothVase.model = lveModel;
   smoothVase.transform.translation = {.5f, .5f, 0.f};
   smoothVase.transform.scale = {3.f, 1.5f, 3.f};
   gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
 
-  lveModel = LveModel::createModelFromFile(lveDevice, "models/quad.obj");
+  lveModel = LveModel::createModelFromFile(
+      lveDevice, "/Users/benfields/Documents/cs_sandbox/vulkan/"
+                 "vulkanEngineStarter/models/quad.obj");
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Loaded quad.obj");
+
   auto floor = LveGameObject::createGameObject();
   floor.model = lveModel;
   floor.transform.translation = {0.f, .5f, 0.f};
   floor.transform.scale = {3.f, 1.f, 3.f};
   gameObjects.emplace(floor.getId(), std::move(floor));
+  log(DEBUG_ACTIVE, appLog, firstAppLogger, "Done loading game objects");
 }
 
 } // namespace lve

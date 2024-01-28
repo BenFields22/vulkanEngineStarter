@@ -1,6 +1,7 @@
 #pragma once
 #define VK_KHR_PORTABILITY_SUBSET_EXTENSION_NAME "VK_KHR_portability_subset"
 #include "lve_window.hpp"
+#include "tools/Utils.hpp"
 
 // std lib headers
 #include <string>
@@ -80,7 +81,7 @@ private:
   void pickPhysicalDevice();
   void createLogicalDevice();
   void createCommandPool();
-
+  Logger *lveDeviceLogger = new Logger("LveDeviceClass", 1, YELLOW);
   // helper functions
   bool isDeviceSuitable(VkPhysicalDevice device);
   std::vector<const char *> getRequiredExtensions();

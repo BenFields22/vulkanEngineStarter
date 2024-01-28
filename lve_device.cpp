@@ -65,6 +65,8 @@ LveDevice::~LveDevice() {
 }
 
 void LveDevice::createInstance() {
+  log(DEBUG_ACTIVE, appLog, lveDeviceLogger,
+      "Entering createInstance function.");
   if (enableValidationLayers && !checkValidationLayerSupport()) {
     throw std::runtime_error("validation layers requested, but not available!");
   }

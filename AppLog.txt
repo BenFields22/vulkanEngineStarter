@@ -1,0 +1,10 @@
+[0]:[MAIN]Main Entry Point into Application
+[1]:[LveDeviceClass]Entering createInstance function.
+[2]:[FirstAppClass]Loading Game Objects
+[3]:[FirstAppClass]Loaded flat_vase.obj
+[4]:[FirstAppClass]Loaded smooth_vase.obj
+[5]:[FirstAppClass]Loaded quad.obj
+[6]:[FirstAppClass]Done loading game objects
+[7]:[FirstAppClass]Entering Run function
+[8]:[FirstAppClass]Exiting Run function
+[9]:[MAIN]Safely Shut Down

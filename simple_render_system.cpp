@@ -62,8 +62,12 @@ void SimpleRenderSystem::createPipeline(VkRenderPass renderPass) {
   pipelineConfig.renderPass = renderPass;
   pipelineConfig.pipelineLayout = pipelineLayout;
   lvePipeline = std::make_unique<LvePipeline>(
-      lveDevice, "shaders/simple_shader.vert.spv",
-      "shaders/simple_shader.frag.spv", pipelineConfig);
+      lveDevice,
+      "/Users/benfields/Documents/cs_sandbox/vulkan/vulkanEngineStarter/"
+      "shaders/simple_shader.vert.spv",
+      "/Users/benfields/Documents/cs_sandbox/vulkan/vulkanEngineStarter/"
+      "shaders/simple_shader.frag.spv",
+      pipelineConfig);
 }
 
 void SimpleRenderSystem::renderGameObjects(FrameInfo &frameInfo) {
